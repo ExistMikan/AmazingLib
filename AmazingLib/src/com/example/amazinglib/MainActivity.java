@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 		// やたら頑張ったUIで構築するか、は考えどころ。
 
 		// コミット
+		// さらにコミット
 	}
 
 }
