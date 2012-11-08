@@ -6,12 +6,33 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
 final public class Utility {
+
+	/**
+	 * メタデータを取得します。<br>
+	 * 
+	 * @param context
+	 * @return メタデータとして埋め込まれている文字列
+	 */
+	public static String getMetadataApplicationId(Context context) {
+		try {
+			ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+			if (ai.metaData != null) {
+				return ai.metaData.getString("com.existmikan.amazinglib.api");
+			}
+		} catch (NameNotFoundException e) {
+			// 無ければnullでも返しておく
+		}
+		return null;
+	}
 
 	/**
 	 * コレクションオブジェクトがnullもしくは空であるか検査します。
