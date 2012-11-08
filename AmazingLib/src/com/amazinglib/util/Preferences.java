@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 
-public class Preferences {
+final public class Preferences {
 
 	/*
 	 * default values

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.amazinglib.BuildConfig;
 
-public class LogUtil {
+final public class LogUtil {
 
 	private static final boolean DEBUG = BuildConfig.DEBUG;
 	private static final String TAG = "AmazingLib";
