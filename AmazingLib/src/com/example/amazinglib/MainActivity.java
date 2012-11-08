@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
 
 		// コミット
 		// さらにコミット
+		// コミット
 	}
 
 }
