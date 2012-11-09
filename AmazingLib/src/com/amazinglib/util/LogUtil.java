@@ -32,4 +32,20 @@ final public class LogUtil {
 			Log.v(TAG, log);
 		}
 	}
+
+	public static void d(String clazz, String log) {
+		d(clazz + "#" + log);
+	}
+
+	public static void i(String clazz, String log) {
+		i(clazz + "#" + log);
+	}
+
+	public static void e(String clazz, String log) {
+		e(clazz + "#" + log);
+	}
+
+	public static void v(String clazz, String log) {
+		v(clazz + "#" + log);
+	}
 }

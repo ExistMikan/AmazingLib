@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -23,6 +24,26 @@ import android.webkit.CookieSyncManager;
 import android.widget.ImageView;
 
 final public class Utility {
+
+	/**
+	 * アプリケーションのアイコンを取得します。<br>
+	 * 存在しなければnullが返されます。
+	 * 
+	 * @param context コンテキスト
+	 * @param packageName パッケージ名
+	 * @return アイコンのDrawableインスタンス
+	 */
+	public static Drawable getApplicationIcon(Context context, String packageName) {
+		Validate.notNull(context, "context");
+		Validate.notNullOrEmpty(packageName, "packageName");
+		Drawable icon = null;
+		try {
+			icon = context.getPackageManager().getApplicationIcon(packageName);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return icon;
+	}
 
 	/**
 	 * Android標準のギャラリーを表示します。<br>

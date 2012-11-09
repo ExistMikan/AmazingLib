@@ -1,6 +1,8 @@
 package com.amazinglib.UIKit;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 
 public class ALAsyncTask {
 
@@ -26,15 +28,15 @@ public class ALAsyncTask {
 		new Task(listener).execute();
 	}
 
-	public static void doAsyncTaskWithDialog(android.app.Activity act, OnAsyncListener listener) {
+	public static void doAsyncTaskWithDialog(Activity act, OnAsyncListener listener) {
 		new TaskWithDialog(act, listener).execute();
 	}
 
-	public static void doAsyncTaskWithDialog(android.app.Activity act, OnSimpleAsyncListener listener) {
+	public static void doAsyncTaskWithDialog(Activity act, OnSimpleAsyncListener listener) {
 		new TaskWithDialog(act, listener).execute();
 	}
 
-	private static class Task extends android.os.AsyncTask<Void, Void, Void> {
+	private static class Task extends AsyncTask<Void, Void, Void> {
 
 		private OnAsyncListener mListener;
 		private OnSimpleAsyncListener mSimpleListener;
@@ -80,24 +82,24 @@ public class ALAsyncTask {
 
 	}
 
-	private static class TaskWithDialog extends android.os.AsyncTask<Void, Void, Void> {
+	private static class TaskWithDialog extends AsyncTask<Void, Void, Void> {
 		private OnAsyncListener mListener;
 		private OnSimpleAsyncListener mSimpleListener;
 		private ProgressDialog mDialog;
 		private boolean isSimple = true;
 
-		public TaskWithDialog(android.app.Activity act, OnSimpleAsyncListener listener) {
+		public TaskWithDialog(Activity act, OnSimpleAsyncListener listener) {
 			mSimpleListener = listener;
 			setup(act);
 		}
 
-		public TaskWithDialog(android.app.Activity act, OnAsyncListener listener) {
+		public TaskWithDialog(Activity act, OnAsyncListener listener) {
 			mListener = listener;
 			isSimple = false;
 			setup(act);
 		}
 
-		private void setup(android.app.Activity act) {
+		private void setup(Activity act) {
 			mDialog = new ProgressDialog(act);
 			mDialog.setIndeterminate(true);
 			mDialog.setCancelable(false);
