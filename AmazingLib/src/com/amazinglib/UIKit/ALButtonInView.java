@@ -4,38 +4,38 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.amazinglib.lab.AndroidSettingManager;
+import com.amazinglib.util.Validate;
+
 public class ALButtonInView {
 
 	/**
 	 * ボタンにActivity起動処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 * @param cls 起動先Activityクラス名
 	 */
-	public static void setStartActivityButton(final Activity act, final View view, final int resId, final Class<?> cls) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				act.startActivity(new Intent(act, cls));
-			}
-		});
+	public static void setStartActivityButton(Activity activity, View view, int buttonId, Class<?> cls) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNull(cls, "cls");
+		ALButtonInView.setStartActivityButton(activity, view, buttonId, new Intent(activity, cls));
 	}
 
 	/**
 	 * ボタンにActivity起動処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
-	 * @param data 起動用Intent
+	 * @param intent 起動用Intent
 	 */
-	public static void setStartActivityButton(final Activity act, final View view, final int resId, final Intent data) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
+	public static void setStartActivityButton(final Activity activity, View view, int buttonId, final Intent intent) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNull(intent, "intent");
+		(view.findViewById(buttonId)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				act.startActivity(data);
+				activity.startActivity(intent);
 			}
 		});
 	}
@@ -43,62 +43,50 @@ public class ALButtonInView {
 	/**
 	 * ボタンにActivity起動処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 * @param packageName 起動先パッケージ名
 	 * @param activityName 起動先Activity名
 	 */
-	public static void setStartActivityOfApplicationButton(final Activity act, final View view, final int resId, final String packageName,
-			final String activityName) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				try {
-					Intent intent = new Intent(Intent.ACTION_MAIN);
-					intent.setClassName(packageName, activityName);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					act.startActivity(intent);
-				} catch (Exception e) {
-					e.printStackTrace();
-					ALToast.showShort(act, packageName + " not installed.");
-				}
-			}
-		});
+	public static void setStartActivityOfApplicationButton(Activity activity, View view, int buttonId, String packageName, String activityName) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNullOrEmpty(packageName, "packageName");
+		Validate.notNullOrEmpty(activityName, "activityName");
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.setClassName(packageName, activityName);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		setStartActivityButton(activity, view, buttonId, intent);
 	}
 
 	/**
 	 * ボタンにActivity起動処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 * @param cls 起動先Activityクラス名
 	 * @param requestCode リクエストコード
 	 */
-	public static void setStartActivityForResultButton(final Activity act, final View view, final int resId, final Class<?> cls, final int requestCode) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				act.startActivityForResult(new Intent(act, cls), requestCode);
-			}
-		});
+	public static void setStartActivityForResultButton(Activity activity, View view, int buttonId, Class<?> cls, int requestCode) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNull(cls, "cls");
+		setStartActivityForResultButton(activity, view, buttonId, new Intent(activity, cls), requestCode);
 	}
 
 	/**
 	 * ボタンにActivity起動処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
-	 * @param data 起動用Intent
+	 * @param intent 起動用Intent
 	 * @param requestCode リクエストコード
 	 */
-	public static void setStartActivityForResultButton(final Activity act, final View view, final int resId, final Intent data, final int requestCode) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
+	public static void setStartActivityForResultButton(final Activity activity, View view, int buttonId, final Intent intent, final int requestCode) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNull(intent, "intent");
+		(view.findViewById(buttonId)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				act.startActivityForResult(data, requestCode);
+				activity.startActivityForResult(intent, requestCode);
 			}
 		});
 	}
@@ -106,15 +94,15 @@ public class ALButtonInView {
 	/**
 	 * ボタンにActivity終了処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 */
-	public static void setFinishButton(final Activity act, final View view, final int resId) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
+	public static void setFinishButton(final Activity activity, View view, int buttonId) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		(view.findViewById(buttonId)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				act.finish();
+				activity.finish();
 			}
 		});
 	}
@@ -122,36 +110,34 @@ public class ALButtonInView {
 	/**
 	 * ボタンにActivity終了処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 * @param resultCode RESULT_OK または RESULT_CANCELED
 	 */
-	public static void setFinishButton(final Activity act, final View view, final int resId, final int resultCode) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				act.setResult(resultCode);
-				act.finish();
-			}
-		});
+	public static void setFinishButton(Activity activity, View view, int buttonId, int resultCode) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		setFinishButton(activity, view, buttonId, resultCode, null);
 	}
 
 	/**
 	 * ボタンにActivity終了処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
 	 * @param view ボタンのあるビュー
-	 * @param resId リソースID
 	 * @param resultCode RESULT_OK または RESULT_CANCELED
-	 * @param data 付加するIntent
+	 * @param intent 付加するIntent
 	 */
-	public static void setFinishButton(final Activity act, final View view, final int resId, final int resultCode, final Intent data) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
+	public static void setFinishButton(final Activity activity, View view, int buttonId, final int resultCode, final Intent intent) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		(view.findViewById(buttonId)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				act.setResult(resultCode, data);
-				act.finish();
+				if (intent != null) {
+					activity.setResult(resultCode, intent);
+				} else {
+					activity.setResult(resultCode);
+				}
+				activity.finish();
 			}
 		});
 	}
@@ -159,16 +145,17 @@ public class ALButtonInView {
 	/**
 	 * ボタンに指定したアプリケーションの設定画面を開く処理を付加します。
 	 * 
-	 * @param act Activityインスタンス
-	 * @param ボタンのあるビュー
-	 * @param resId リソースID
+	 * @param view ボタンのあるビュー
 	 * @param packageName 設定画面を開くアプリのパッケージ名
 	 */
-	public static void setSettingActivityButton(final Activity act, final View view, final int resId, final String packageName) {
-		(view.findViewById(resId)).setOnClickListener(new View.OnClickListener() {
+	public static void setSettingActivityButton(final Activity activity, View view, int buttonId, final String packageName) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(view, "view");
+		Validate.notNullOrEmpty(packageName, "packageName");
+		(view.findViewById(buttonId)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ALActivity.startSettingActivity(act, packageName);
+				AndroidSettingManager.openApplicationDetailsSettingActivity(activity, packageName);
 			}
 		});
 	}

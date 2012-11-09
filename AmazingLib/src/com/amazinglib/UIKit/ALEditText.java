@@ -4,17 +4,18 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
+import com.amazinglib.util.Validate;
+
 public class ALEditText {
 
 	/**
 	 * EditTextから文字列を取得します。
 	 * 
-	 * @param act
-	 * @param resId EditTextのID
 	 * @return 文字列
 	 */
-	public static String getString(Activity act, int resId) {
-		return (((EditText) act.findViewById(resId))).getText().toString();
+	public static String getString(Activity activity, int editTextId) {
+		Validate.notNull(activity, "activity");
+		return (((EditText) activity.findViewById(editTextId))).getText().toString();
 	}
 
 	/**

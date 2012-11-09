@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
+import com.amazinglib.util.Validate;
+
 public class ALAsyncTask {
 
 	public static interface OnAsyncListener {
@@ -21,19 +23,25 @@ public class ALAsyncTask {
 	}
 
 	public static void doAsyncTask(OnAsyncListener listener) {
+		Validate.notNull(listener, "listener");
 		new Task(listener).execute();
 	}
 
 	public static void doAsyncTask(OnSimpleAsyncListener listener) {
+		Validate.notNull(listener, "listener");
 		new Task(listener).execute();
 	}
 
-	public static void doAsyncTaskWithDialog(Activity act, OnAsyncListener listener) {
-		new TaskWithDialog(act, listener).execute();
+	public static void doAsyncTaskWithDialog(Activity activity, OnAsyncListener listener) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(listener, "listener");
+		new TaskWithDialog(activity, listener).execute();
 	}
 
-	public static void doAsyncTaskWithDialog(Activity act, OnSimpleAsyncListener listener) {
-		new TaskWithDialog(act, listener).execute();
+	public static void doAsyncTaskWithDialog(Activity activity, OnSimpleAsyncListener listener) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(listener, "listener");
+		new TaskWithDialog(activity, listener).execute();
 	}
 
 	private static class Task extends AsyncTask<Void, Void, Void> {

@@ -26,6 +26,22 @@ import android.widget.ImageView;
 final public class Utility {
 
 	/**
+	 * 指定したパッケージがインストールされているかを調べます。
+	 * 
+	 * @return インストールされていればtrueを返します。
+	 * */
+	public static boolean isInstalledPackage(Activity activity, String packageName) {
+		Validate.notNull(activity, "activity");
+		Validate.notNullOrEmpty(packageName, "packageName");
+		try {
+			activity.getPackageManager().getApplicationInfo(packageName, 0);
+		} catch (NameNotFoundException e) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * アプリケーションのアイコンを取得します。<br>
 	 * 存在しなければnullが返されます。
 	 * 
@@ -52,6 +68,7 @@ final public class Utility {
 	 * @param requestCode
 	 */
 	public static void openGallery(Activity activity, int requestCode) {
+		Validate.notNull(activity, "activity");
 		Intent intent = new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -65,6 +82,7 @@ final public class Utility {
 	 * @param requestCode
 	 */
 	public static void openGallery(Fragment fragment, int requestCode) {
+		Validate.notNull(fragment, "fragment");
 		Intent intent = new Intent();
 		intent.setType("image/*");
 		intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -94,6 +112,7 @@ final public class Utility {
 	 * @return 取得したbitmap
 	 */
 	public static Bitmap getBitmapFromImageView(ImageView view) {
+		Validate.notNull(view, "view");
 		BitmapDrawable bitmapDrawable = (BitmapDrawable) view.getDrawable();
 		Bitmap bitmap = bitmapDrawable.getBitmap();
 		return bitmap;
@@ -106,6 +125,7 @@ final public class Utility {
 	 * @return メタデータとして埋め込まれている文字列
 	 */
 	public static String getMetadataApplicationId(Context context) {
+		Validate.notNull(context, "context");
 		try {
 			ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
 			if (ai.metaData != null) {
@@ -145,6 +165,7 @@ final public class Utility {
 	 * @return 引数に指定した型で構成されるArrayList
 	 */
 	public static <T> ArrayList<T> arrayList(T... ts) {
+		Validate.notNull(ts, "ts");
 		ArrayList<T> arrayList = new ArrayList<T>(ts.length);
 		for (T t : ts) {
 			arrayList.add(t);
@@ -159,6 +180,8 @@ final public class Utility {
 	 * @param domain ドメイン。
 	 */
 	public static void clearCookiesForDomain(Context context, String domain) {
+		Validate.notNull(context, "context");
+		Validate.notNullOrEmpty(domain, "domain");
 		// 確実にインスタンスの作成が行われるようにする作業
 		CookieSyncManager syncManager = CookieSyncManager.createInstance(context);
 		syncManager.sync();
@@ -189,6 +212,7 @@ final public class Utility {
 	 * @param alpha Alpha値
 	 */
 	public static void setAlpha(View view, float alpha) {
+		Validate.notNull(view, "view");
 		// setAlphaはAPI11以上でのみ使用可能。よって全てのAPIで利用できる方法で代用。
 		AlphaAnimation alphaAnimation = new AlphaAnimation(alpha, alpha);
 		alphaAnimation.setDuration(0);
@@ -203,13 +227,13 @@ final public class Utility {
 	 * @return MD5ハッシュ値
 	 */
 	public static String md5hash(String key) {
+		Validate.notNullOrEmpty(key, "key");
 		MessageDigest hash = null;
 		try {
 			hash = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
 			return null;
 		}
-
 		hash.update(key.getBytes());
 		byte[] digest = hash.digest();
 		StringBuilder builder = new StringBuilder();

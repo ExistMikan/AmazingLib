@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.amazinglib.util.Validate;
+
 public class ALDialog {
 
 	public static interface OnDialogButtonListener {
@@ -17,16 +19,13 @@ public class ALDialog {
 	 * OKボタンとCANCELボタンで構成されるダイアログを生成及び表示します。<br>
 	 * このダイアログはキャンセルできません。<br>
 	 * 各ボタン押下後はdismiss()メソッドが自動的に呼ばれます。<br>
-	 * 
-	 * @param act アクティビティインスタンス
-	 * @param layoutId レイアウトID
-	 * @param okButtonId OKボタンのリソースID
-	 * @param cancelButtonId CANCELボタンのリソースID
-	 * @param lisetener リスナーインスタンス
 	 */
-	public static void setOkCancelDialog(final Activity act, final int layoutId, final int okButtonId, final int cancelButtonId, final OnDialogButtonListener listener) {
-		View layout = ((LayoutInflater) act.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(act);
+	public static void setOkCancelDialog(final Activity activity, final int layoutId, final int okButtonId, final int cancelButtonId,
+			final OnDialogButtonListener listener) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(listener, "listener");
+		View layout = ((LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
 		alertDialogBuilder.setInverseBackgroundForced(true).setCancelable(false).setView(layout);
 		final AlertDialog alertDialog = alertDialogBuilder.create();
 		layout.findViewById(okButtonId).setOnClickListener(new OnClickListener() {
@@ -54,15 +53,12 @@ public class ALDialog {
 	 * OKボタンのみで構成されるダイアログを生成及び表示します。<br>
 	 * このダイアログはキャンセルできません。<br>
 	 * 各ボタン押下後はdismiss()メソッドが自動的に呼ばれます。<br>
-	 * 
-	 * @param act アクティビティインスタンス
-	 * @param layoutId レイアウトID
-	 * @param okButtonId OKボタンのリソースID
-	 * @param lisetener リスナーインスタンス
 	 */
-	public static void setOkDialog(final Activity act, final int layoutId, final int okButtonId, final OnDialogButtonListener listener) {
-		View layout = ((LayoutInflater) act.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(act);
+	public static void setOkDialog(final Activity activity, final int layoutId, final int okButtonId, final OnDialogButtonListener listener) {
+		Validate.notNull(activity, "activity");
+		Validate.notNull(listener, "listener");
+		View layout = ((LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
 		alertDialogBuilder.setInverseBackgroundForced(true).setCancelable(false).setView(layout);
 		final AlertDialog alertDialog = alertDialogBuilder.create();
 		layout.findViewById(okButtonId).setOnClickListener(new OnClickListener() {
@@ -81,18 +77,14 @@ public class ALDialog {
 	 * OKボタンとテキストのみで構成されるダイアログを生成及び表示します。<br>
 	 * このダイアログはキャンセルできません。<br>
 	 * 各ボタン押下後はdismiss()メソッドが自動的に呼ばれます。<br>
-	 * 
-	 * @param act アクティビティインスタンス
-	 * @param layoutId レイアウトID
-	 * @param okButtonId OKボタンのリソースID
-	 * @param textId テキストビューのリソースID
-	 * @param text セットするテキスト
-	 * @param lisetener リスナーインスタンス
 	 */
-	public static void setOkTextDialog(final Activity act, final int layoutId, final int okButtonId, final int textId, final String text,
+	public static void setOkTextDialog(final Activity activity, final int layoutId, final int okButtonId, final int textId, final String text,
 			final OnDialogButtonListener listener) {
-		View layout = ((LayoutInflater) act.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(act);
+		Validate.notNull(activity, "activity");
+		Validate.notNullOrEmpty(text, "text");
+		Validate.notNull(listener, "listener");
+		View layout = ((LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE)).inflate(layoutId, null);
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
 		alertDialogBuilder.setInverseBackgroundForced(true).setCancelable(false).setView(layout);
 		final AlertDialog alertDialog = alertDialogBuilder.create();
 		((TextView) layout.findViewById(textId)).setText(text);

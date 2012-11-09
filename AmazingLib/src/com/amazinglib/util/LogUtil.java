@@ -9,6 +9,30 @@ final public class LogUtil {
 	private static final boolean DEBUG = BuildConfig.DEBUG;
 	private static final String TAG = "AmazingLib";
 
+	public static void argD(String arg, String name) {
+		if (DEBUG) {
+			Log.d(TAG, name + " = " + arg);
+		}
+	}
+
+	public static void argI(String arg, String name) {
+		if (DEBUG) {
+			Log.i(TAG, name + " = " + arg);
+		}
+	}
+
+	public static void argE(String arg, String name) {
+		if (DEBUG) {
+			Log.e(TAG, name + " = " + arg);
+		}
+	}
+
+	public static void argV(String arg, String name) {
+		if (DEBUG) {
+			Log.v(TAG, name + " = " + arg);
+		}
+	}
+
 	public static void d(String log) {
 		if (DEBUG) {
 			Log.d(TAG, log);

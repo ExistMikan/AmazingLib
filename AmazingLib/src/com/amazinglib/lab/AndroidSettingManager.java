@@ -11,6 +11,7 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 
+import com.amazinglib.util.Utility;
 import com.amazinglib.util.Validate;
 
 /**
@@ -121,8 +122,7 @@ public class AndroidSettingManager {
 	/**
 	 * 指定された設定用Activityを開きます
 	 * 
-	 * @param activity
-	 * @param action
+	 * @param action 設定先を表すAction名
 	 * @return Activityを開くことに成功した場合trueを返します
 	 */
 	public static boolean openSettingActivity(Activity activity, String action) {
@@ -137,16 +137,30 @@ public class AndroidSettingManager {
 	}
 
 	/**
-	 * アプリケーションの詳細設定画面を開きます
+	 * 自分のアプリケーションの詳細設定画面を開きます
 	 * 
-	 * @param activity
 	 * @return 詳細設定画面を開くことに成功した場合trueを返します
 	 */
 	public static boolean openApplicationDetailsSettingActivity(Activity activity) {
 		Validate.notNull(activity, "activity");
+		return openApplicationDetailsSettingActivity(activity, activity.getPackageName());
+	}
+
+	/**
+	 * 指定したアプリケーションの詳細設定画面を開きます
+	 * 
+	 * @param packageName 指定先アプリケーションのパッケージ名
+	 * @return 詳細設定画面を開くことに成功した場合trueを返します
+	 */
+	public static boolean openApplicationDetailsSettingActivity(Activity activity, String packageName) {
+		Validate.notNull(activity, "activity");
+		Validate.notNullOrEmpty(packageName, "packageName");
+		if (!Utility.isInstalledPackage(activity, packageName)) {
+			return false;
+		}
 		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
 			Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-			i.setData(Uri.parse("package:" + activity.getPackageName()));
+			i.setData(Uri.parse("package:" + packageName));
 			try {
 				activity.startActivity(i);
 			} catch (ActivityNotFoundException e) {
@@ -155,7 +169,8 @@ public class AndroidSettingManager {
 		} else {
 			Intent i = new Intent(Intent.ACTION_VIEW);
 			i.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
-			i.putExtra("pkg", activity.getPackageName());
+			String key = (VERSION.SDK_INT == 8 ? "pkg" : "com.android.settings.ApplicationPkgName");
+			i.putExtra(key, packageName);
 			try {
 				activity.startActivity(i);
 			} catch (ActivityNotFoundException e) {

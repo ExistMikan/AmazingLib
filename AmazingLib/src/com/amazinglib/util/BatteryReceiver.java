@@ -10,7 +10,7 @@ public class BatteryReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		LogUtil.d(CLASS + " : onReceive()");
+		LogUtil.d(CLASS, "onReceive()");
 
 		String action = intent.getAction();
 		if (action != null && action.equals(Intent.ACTION_BATTERY_CHANGED)) {
@@ -19,7 +19,8 @@ public class BatteryReceiver extends BroadcastReceiver {
 			// 状況 0:未接続 1: AC 2:USB
 			int plugged = intent.getIntExtra("plugged", 0);
 
-			LogUtil.d(CLASS + " : level = " + level + " plugged = " + plugged);
+			LogUtil.argD("" + level, "level");
+			LogUtil.argD("" + plugged, "plugged");
 		}
 	}
 
