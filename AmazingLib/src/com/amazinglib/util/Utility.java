@@ -1,20 +1,82 @@
 package com.amazinglib.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.widget.ImageView;
 
 final public class Utility {
+
+	/**
+	 * Android標準のギャラリーを表示します。<br>
+	 * 
+	 * @param activity
+	 * @param requestCode
+	 */
+	public static void openGallery(Activity activity, int requestCode) {
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		activity.startActivityForResult(intent, requestCode);
+	}
+
+	/**
+	 * Android標準のギャラリーを表示します。<br>
+	 * 
+	 * @param activity
+	 * @param requestCode
+	 */
+	public static void openGallery(Fragment fragment, int requestCode) {
+		Intent intent = new Intent();
+		intent.setType("image/*");
+		intent.setAction(Intent.ACTION_GET_CONTENT);
+		fragment.startActivityForResult(intent, requestCode);
+	}
+
+	/**
+	 * InputStreamオブジェクトをクローズします。<br>
+	 * finally節でIOException対応を特にしない場合に利用できます。
+	 * 
+	 * @param in
+	 */
+	public static void closeInputSteram(InputStream in) {
+		if (in != null) {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * ImageViewからBitmapを取得します。
+	 * 
+	 * @param view
+	 * @return 取得したbitmap
+	 */
+	public static Bitmap getBitmapFromImageView(ImageView view) {
+		BitmapDrawable bitmapDrawable = (BitmapDrawable) view.getDrawable();
+		Bitmap bitmap = bitmapDrawable.getBitmap();
+		return bitmap;
+	}
 
 	/**
 	 * メタデータを取得します。<br>
