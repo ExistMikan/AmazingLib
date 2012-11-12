@@ -106,7 +106,8 @@ final public class Utility {
 	}
 
 	/**
-	 * ImageViewからBitmapを取得します。
+	 * ImageViewからBitmapを取得します。<br>
+	 * ImageViewからBitmapを取得出来なかった場合は、nullが返されます。
 	 * 
 	 * @param view
 	 * @return 取得したbitmap
@@ -114,6 +115,9 @@ final public class Utility {
 	public static Bitmap getBitmapFromImageView(ImageView view) {
 		Validate.notNull(view, "view");
 		BitmapDrawable bitmapDrawable = (BitmapDrawable) view.getDrawable();
+		if (bitmapDrawable == null) {
+			return null;
+		}
 		Bitmap bitmap = bitmapDrawable.getBitmap();
 		return bitmap;
 	}
