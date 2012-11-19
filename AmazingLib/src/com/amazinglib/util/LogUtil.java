@@ -72,4 +72,20 @@ final public class LogUtil {
 	public static void v(String clazz, String log) {
 		v(clazz + "#" + log);
 	}
+
+	public static void d(Object clazz, String log) {
+		d(clazz.getClass().getSimpleName() + "#" + log);
+	}
+
+	public static void i(Object clazz, String log) {
+		i(clazz.getClass().getSimpleName() + "#" + log);
+	}
+
+	public static void e(Object clazz, String log) {
+		e(clazz.getClass().getSimpleName() + "#" + log);
+	}
+
+	public static void v(Object clazz, String log) {
+		v(clazz.getClass().getSimpleName() + "#" + log);
+	}
 }
