@@ -88,4 +88,20 @@ final public class LogUtil {
 	public static void v(Object clazz, String log) {
 		v(clazz.getClass().getSimpleName() + "#" + log);
 	}
+
+	public static <T> void d(Class<T> clazz, String log) {
+		d(clazz.getSimpleName() + "#" + log);
+	}
+
+	public static <T> void i(Class<T> clazz, String log) {
+		i(clazz.getSimpleName() + "#" + log);
+	}
+
+	public static <T> void e(Class<T> clazz, String log) {
+		e(clazz.getSimpleName() + "#" + log);
+	}
+
+	public static <T> void v(Class<T> clazz, String log) {
+		v(clazz.getSimpleName() + "#" + log);
+	}
 }
