@@ -7,7 +7,11 @@ import com.example.amazinglib.BuildConfig;
 final public class LogUtil {
 
 	private static final boolean DEBUG = BuildConfig.DEBUG;
-	private static final String TAG = "AmazingLib";
+	private static String TAG = "AmazingLib";
+
+	public static void changeTag(String tag) {
+		TAG = tag;
+	}
 
 	public static void argD(String arg, String name) {
 		if (DEBUG) {
