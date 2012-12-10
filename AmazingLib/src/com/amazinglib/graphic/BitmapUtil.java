@@ -17,7 +17,7 @@ import com.amazinglib.util.LogUtil;
 public class BitmapUtil {
 
 	@SuppressWarnings("deprecation")
-	public Drawable bitmap2Drawable(Resources res, Bitmap bitmap) {
+	public static Drawable bitmap2Drawable(Resources res, Bitmap bitmap) {
 		if (CompatUtil.canUse(4)) {
 			return new BitmapDrawable(res, bitmap);
 		} else {
