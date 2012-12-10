@@ -1,10 +1,11 @@
 package com.amazinglib.UIKit;
 
-import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import com.amazinglib.compat.CompatUtil;
 import com.amazinglib.util.Validate;
 
 public class ALImageView {
@@ -15,15 +16,15 @@ public class ALImageView {
 		((ImageView) activity.findViewById(imageViewId)).setImageDrawable(image);
 	}
 
-	@SuppressLint("NewApi")
+	@TargetApi(16)
 	@SuppressWarnings("deprecation")
 	public static void setBackground(ImageView view, Drawable image) {
 		Validate.notNull(view, "view");
 		Validate.notNull(image, "image");
-		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-			view.setBackgroundDrawable(image);
-		} else {
+		if (CompatUtil.canUse(16)) {
 			view.setBackground(image);
+		} else {
+			view.setBackgroundDrawable(image);
 		}
 	}
 }
