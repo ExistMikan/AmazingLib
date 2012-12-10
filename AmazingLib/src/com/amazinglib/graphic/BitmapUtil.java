@@ -5,13 +5,25 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
 
 import com.amazinglib.compat.ALSize;
+import com.amazinglib.compat.CompatUtil;
 import com.amazinglib.util.LogUtil;
 
 public class BitmapUtil {
+
+	@SuppressWarnings("deprecation")
+	public Drawable bitmap2Drawable(Resources res, Bitmap bitmap) {
+		if (CompatUtil.canUse(4)) {
+			return new BitmapDrawable(res, bitmap);
+		} else {
+			return new BitmapDrawable(bitmap);
+		}
+	}
 
 	private static Bitmap makeBitmap(int densityDpi, Resources resources, int resid, int maxWidth, int maxHeight) {
 		BitmapFactory.Options options = new BitmapFactory.Options();
