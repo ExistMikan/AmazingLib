@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- 一般 -->
+    <string name="app_name">AmazingLib</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">AmazingLib</string>
+
+    <!-- Notification用 -->
+    <string name="notify_start_service">接続用サービスを起動しました</string>
+    <string name="notify_service_alive">接続用サービスが稼働しています</string>
+
+    <!-- toast表示用 -->
+    <string name="notify_not_connected">接続されていません</string>
+    <string name="notify_connected">と接続されました</string>
+    <string name="notify_bluetooth_on">ONです</string>
+    <string name="notify_bluetooth_off">OFFです</string>
+    <string name="notify_bluetooth_off_attention">BluetoothがOFFです</string>
+    <string name="notify_unable_connect">端末と接続出来ません</string>
+    <string name="notify_connect_lost">端末との接続が外れました</string>
+
+    <!-- レイアウトファイル用 -->
+    <string name="layout_welcome">Welcome to BlueIntent</string>
+    <string name="layout_smartphone">スマートフォン</string>
+    <string name="layout_bluetooth_device">Bluetooth端末</string>
+    <string name="layout_scanning">スキャン中</string>
+    <string name="layout_search">検索</string>
+    <string name="layout_status_c">状態 : </string>
+    <string name="layout_status_none">未接続</string>
+    <string name="layout_status_listen">接続待機</string>
+    <string name="layout_status_connecting">接続開始</string>
+    <string name="layout_status_connected">接続中</string>
+    <string name="layout_c"> : </string>
+    <string name="layout_bluetooth_setting">Bluetooth設定</string>
+    <string name="layout_start_server">サーバ起動</string>
+    <string name="layout_stop_server">サーバ停止</string>
+    <string name="layout_discovery_device">端末検索</string>
+
+</resources>

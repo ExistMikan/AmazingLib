@@ -22,18 +22,58 @@ public final class R {
         public static int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static int menu_settings=0x7f090000;
+        public static int devicelist=0x7f090003;
+        public static int menu_settings=0x7f090004;
+        public static int progress=0x7f090001;
+        public static int progressText=0x7f090000;
+        public static int search=0x7f090002;
     }
     public static final class layout {
         public static int activity_main=0x7f030000;
+        public static int discovery_device=0x7f030001;
     }
     public static final class menu {
         public static int activity_main=0x7f080000;
     }
     public static final class string {
+        /**  一般 
+         */
         public static int app_name=0x7f060000;
         public static int hello_world=0x7f060001;
+        public static int layout_bluetooth_device=0x7f06000f;
+        public static int layout_bluetooth_setting=0x7f060018;
+        public static int layout_c=0x7f060017;
+        public static int layout_discovery_device=0x7f06001b;
+        public static int layout_scanning=0x7f060010;
+        public static int layout_search=0x7f060011;
+        public static int layout_smartphone=0x7f06000e;
+        public static int layout_start_server=0x7f060019;
+        public static int layout_status_c=0x7f060012;
+        public static int layout_status_connected=0x7f060016;
+        public static int layout_status_connecting=0x7f060015;
+        public static int layout_status_listen=0x7f060014;
+        public static int layout_status_none=0x7f060013;
+        public static int layout_stop_server=0x7f06001a;
+        /**  レイアウトファイル用 
+ レイアウトファイル用 
+         */
+        public static int layout_welcome=0x7f06000d;
         public static int menu_settings=0x7f060002;
+        public static int notify_bluetooth_off=0x7f060009;
+        public static int notify_bluetooth_off_attention=0x7f06000a;
+        public static int notify_bluetooth_on=0x7f060008;
+        public static int notify_connect_lost=0x7f06000c;
+        public static int notify_connected=0x7f060007;
+        /**  toast表示用 
+ toast表示用 
+         */
+        public static int notify_not_connected=0x7f060006;
+        public static int notify_service_alive=0x7f060005;
+        /**  Notification用 
+ Notification用 
+         */
+        public static int notify_start_service=0x7f060004;
+        public static int notify_unable_connect=0x7f06000b;
         public static int title_activity_main=0x7f060003;
     }
     public static final class style {
