@@ -13,7 +13,6 @@ public class MainActivity extends Activity {
 		// 特に何するわけでもないクラス
 		// そのうちApiDemosみたいなんにするか、
 		// やたら頑張ったUIで構築するか、は考えどころ。
-
 		// コミット
 		// さらにコミット
 		// コミット
